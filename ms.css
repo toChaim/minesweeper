@@ -1,16 +1,31 @@
+
+h1{
+	text-align: center;
+}
+button{
+	display: inline-block;
+}
+.red{
+	background-color: red;
+}
 .cell{
 	border: 1px solid blue;
-	height: 9.2vw;
+	height: 6.5vw;
 	width: 9.25vw;
 	display: inline-block;
 	text-align: center;
 }
 .show{
-	background-color: yellow;
 }
-.mine{
+.marked{
 	border-color: red;
 }
 #board{
 	border: 1px solid green;
+}
+#board p{
+	visibility: hidden;
+}
+#board .show p{
+	visibility: visible;
 }

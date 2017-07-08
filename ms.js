@@ -1,6 +1,7 @@
 $(document).ready(function(){
-
+	var $mines = $("#mines");
 	var $board = $("#board");
+	var protect = false;
 	var mines = 0;
 
 	var Cell = (function(){
@@ -51,13 +52,30 @@ $(document).ready(function(){
 			};
 		}
 	})();
-
+	$("#protect").on("click", function(){
+		protect = !protect;
+		$("#protect").toggleClass("red");
+		//console.log($("#protect").attr('class'));
+	});
 	$board.on("click", "div" ,function(){
 		var $this = $(this);
 		var col = parseInt($this.attr("col"));
-		console.log(col);
 		var row = parseInt($this.attr("row"));
-		cells[row][col].display();
+		var cell = cells[row][col];
+
+		if(protect){
+			$this.toggleClass("marked");
+			$mines.text(mines - parseInt($(".marked").length));
+			protect = false;
+			$("#protect").toggleClass("red");
+		}else if(!$this.hasClass("marked")){
+			cells[row][col].display();
+		}
+
+		if($(".show").length + mines === 100){
+			console.log("YOU WIN!!!");
+		}
+
 	});
 
 	var cells = [];
@@ -70,7 +88,7 @@ $(document).ready(function(){
 		}
 	}
 
-	while(mines <= 10){
+	while(mines < 10){
 		let row = Math.floor(Math.random()*10);
 		let col = Math.floor(Math.random()*10);
 		if(cells[row][col].mine === false){
@@ -79,6 +97,7 @@ $(document).ready(function(){
 			mines++;
 		}
 	}
+	$mines.text(mines);
 
 	for(let row = 0; row < 10; row++){
 		cells.push([]);
