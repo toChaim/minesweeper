@@ -34,7 +34,8 @@ $(document).ready(function(){
 
 			this.display = function(){
 				if(this.mine){
-					console.log("BOOM!!!");
+					this.$obj.find("p").text("BOOM!!");
+					this.$obj.addClass("show");
 				}else if(this.number !== 0){
 					this.$obj.addClass("show");
 				}else if(this.number === 0){
