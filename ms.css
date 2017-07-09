@@ -10,8 +10,8 @@ button{
 }
 .cell{
 	border: 1px solid blue;
-	height: 6.5vw;
-	width: 9.25vw;
+	height: 9.5%;
+	width: 9.5%;
 	display: inline-block;
 	text-align: center;
 }
@@ -20,7 +20,22 @@ button{
 .marked{
 	border-color: red;
 }
+#board .boom{
+	background-color: red;
+	float: right;
+	margin-top: -125%;
+	margin-right: -53%;
+	border-radius: 50%;
+	position: relative;
+}
+#board .boom p{
+	color: yellow;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	font-size: 2em;
+}
 #board{
+	width: 90vw;
+	height: 80vh;
 	border: 1px solid green;
 }
 #board p{

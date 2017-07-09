@@ -22,22 +22,26 @@ $(document).ready(function(){
 			this.mine = false;
 			this.number = 0;
 			this.setNumber = function(){
-				for(let r = this.row - 1; r <= this.row + 1; r++){
-					if(r < 0 || r > 9) continue;
-					for(let c = this.col - 1; c <= this.col + 1; c++){
-						if(c < 0 || c > 9) continue;
-						if(cells[r][c].mine){ this.number++; }
+				if(this.mine){
+					this.number = "Boom!";
+				}else{
+					for(let r = this.row - 1; r <= this.row + 1; r++){
+						if(r < 0 || r > 9) continue;
+						for(let c = this.col - 1; c <= this.col + 1; c++){
+							if(c < 0 || c > 9) continue;
+							if(cells[r][c].mine){ this.number++; }
+						}
 					}
 				}
-				this.$obj.find("p").text(this.number);
+				this.$obj.children("p").text(this.number);
 			};
 
 			this.display = function(){
+				this.$obj.addClass("show");
 				if(this.mine){
-					this.$obj.find("p").text("BOOM!!");
-					this.$obj.addClass("show");
-				}else if(this.number !== 0){
-					this.$obj.addClass("show");
+					var $boom = $("<div>", {class: "boom"});
+					this.$obj.children("p").append($boom);
+					$boom.append($("<p>", {text: "BOOM!!"}));
 				}else if(this.number === 0){
 					this.$obj.addClass("show");
 					for(let r = this.row - 1; r <= this.row + 1; r++){
@@ -58,8 +62,13 @@ $(document).ready(function(){
 		$("#protect").toggleClass("red");
 		//console.log($("#protect").attr('class'));
 	});
-	$board.on("click", "div" ,function(){
+	$board.on("click", "div" ,function(event){
+		event.stopPropagation();
 		var $this = $(this);
+		
+		if($this.hasClass("cell") === false) return;
+		if($this.hasClass("show")) return;
+		
 		var col = parseInt($this.attr("col"));
 		var row = parseInt($this.attr("row"));
 		var cell = cells[row][col];
