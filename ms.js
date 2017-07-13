@@ -42,6 +42,8 @@ $(document).ready(function(){
 					var $boom = $("<div>", {class: "boom"});
 					this.$obj.children("p").append($boom);
 					$boom.append($("<p>", {text: "BOOM!!"}));
+					$boom.animate({backgroundColor: "blue"});
+					console.log($boom);
 				}else if(this.number === 0){
 					this.$obj.addClass("show");
 					for(let r = this.row - 1; r <= this.row + 1; r++){
@@ -68,7 +70,7 @@ $(document).ready(function(){
 		
 		if($this.hasClass("cell") === false) return;
 		if($this.hasClass("show")) return;
-		
+
 		var col = parseInt($this.attr("col"));
 		var row = parseInt($this.attr("row"));
 		var cell = cells[row][col];
@@ -90,12 +92,16 @@ $(document).ready(function(){
 
 	var cells = [];
 	for(let row = 0; row < 10; row++){
+		var $row = $("<tr>");
 		cells.push([]);
+
 		for(let col = 0; col < 10; col++){
 			var cell = new Cell(col, row);
-			$board.append(cell.$obj);
+			$row.append(cell.$obj);
 			cells[row].push(cell);
 		}
+
+		$board.append($row);
 	}
 
 	while(mines < 10){
