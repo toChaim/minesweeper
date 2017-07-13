@@ -12,7 +12,8 @@ button{
 	border: 1px solid blue;
 	height: 9.5%;
 	width: 9.5%;
-	display: inline-block;
+	display: table-cell;
+	vertical-align: middle;
 	text-align: center;
 }
 .show{
