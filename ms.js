@@ -39,10 +39,10 @@ $(document).ready(function(){
 
 			this.display = function(){
 				this.$obj.addClass("show");
+				this.$obj.removeClass("marked");
 				if(this.mine){
 					var $boom = $("<div>", {class: "boom"});
 					$boom.append($("<p>", {text: "BOOM!!"}));
-					//$boom.animate({backgroundColor: "blue"});
 					this.$obj.children("p").append($boom);
 				}else if(this.number === 0){
 					this.$obj.addClass("show");
@@ -59,11 +59,47 @@ $(document).ready(function(){
 			};
 		}
 	})();
+
+	$('#reset').on('click', function(){
+		playing = true;
+		$('.boom').remove();
+		$('.cell').removeClass('show marked mine');
+		mines = 0;
+
+		for(let row = 0; row < 10; row++){
+			
+			for(let col = 0; col < 10; col++){
+				cells[row][col].mine = false;
+				cells[row][col].number = 0;
+			}
+		}
+
+		while(mines < 10){
+			let row = Math.floor(Math.random()*10);
+			let col = Math.floor(Math.random()*10);
+			if(cells[row][col].mine === false){
+				cells[row][col].mine = true;
+				cells[row][col].$obj.addClass("mine");
+				mines++;
+			}
+		}
+		$mines.text(mines);
+
+		for(let row = 0; row < 10; row++){
+			
+			for(let col = 0; col < 10; col++){
+				cells[row][col].setNumber();
+			}
+		}
+
+	});
+
 	$("#protect").on("click", function(){
 		protect = !protect;
 		$("#protect").toggleClass("red");
-		//console.log($("#protect").attr('class'));
+		console.log($("#protect").attr('class'));
 	});
+
 	$board.on("click", "div" ,function(event){
 		event.stopPropagation();
 		if( !playing ) return;
@@ -117,11 +153,10 @@ $(document).ready(function(){
 	$mines.text(mines);
 
 	for(let row = 0; row < 10; row++){
-		cells.push([]);
+
 		for(let col = 0; col < 10; col++){
 			cells[row][col].setNumber();
 		}
 	}
-
 
 });
