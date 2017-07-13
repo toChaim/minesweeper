@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var $mines = $("#mines");
 	var $board = $("#board");
-	var $playing = true;
+	var playing = true;
 	var protect = false;
 	var mines = 0;
 
@@ -66,6 +66,7 @@ $(document).ready(function(){
 	});
 	$board.on("click", "div" ,function(event){
 		event.stopPropagation();
+		if( !playing ) return;
 		var $this = $(this);
 		
 		if($this.hasClass("cell") === false) return;
