@@ -9,6 +9,7 @@ button{
 	background-color: red;
 }
 .cell{
+	position: relative;
 	border: 1px solid blue;
 	display: table-cell;
 	vertical-align: middle;
@@ -20,12 +21,18 @@ button{
 	border-color: red;
 }
 #board .boom{
+	background-color: red;
 	float: right;
-	margin-top: -60%;
-	margin-right: 3%;
+	height: 100%;
+	width: 100%;
+	top: 0%;
+	left: 0%;
 	border-radius: 50%;
-	position: relative;
-	border: 1px solid black;
+	position: absolute;
+	border: 2px dotted darkred;
+	box-shadow: 0px 0px 5px 10px darkred inset;
+	transform: scale(2, 2);
+	z-index: 100;
 }
 #board .boom p{
 	color: yellow;

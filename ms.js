@@ -40,10 +40,9 @@ $(document).ready(function(){
 				this.$obj.addClass("show");
 				if(this.mine){
 					var $boom = $("<div>", {class: "boom"});
-					this.$obj.children("p").append($boom);
 					$boom.append($("<p>", {text: "BOOM!!"}));
-					$boom.animate({backgroundColor: "blue"});
-					console.log($boom);
+					//$boom.animate({backgroundColor: "blue"});
+					this.$obj.children("p").append($boom);
 				}else if(this.number === 0){
 					this.$obj.addClass("show");
 					for(let r = this.row - 1; r <= this.row + 1; r++){
