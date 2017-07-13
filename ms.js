@@ -12,7 +12,7 @@ $(document).ready(function(){
 			this.id = "cell" + idCount++;
 			this.col = c;
 			this.row = r;
-			this.$obj = $("<div>",{
+			this.$obj = $("<td>",{
 				id: this.id,
 				class: "cell",
 				row: this.row,
@@ -63,6 +63,7 @@ $(document).ready(function(){
 	$('#reset').on('click', function(){
 		playing = true;
 		$('.boom').remove();
+		$('.win').remove();
 		$('.cell').removeClass('show marked mine');
 		mines = 0;
 
@@ -97,10 +98,9 @@ $(document).ready(function(){
 	$("#protect").on("click", function(){
 		protect = !protect;
 		$("#protect").toggleClass("red");
-		console.log($("#protect").attr('class'));
 	});
 
-	$board.on("click", "div" ,function(event){
+	$board.on("click", "td" ,function(event){
 		event.stopPropagation();
 		if( !playing ) return;
 		var $this = $(this);
@@ -122,6 +122,8 @@ $(document).ready(function(){
 		}
 
 		if($(".show").length + mines === 100){
+			$board.append($("<h1>", {text: "YOU WIN !!!", class: "win"}));
+			playing = false;
 			console.log("YOU WIN!!!");
 		}
 
