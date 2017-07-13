@@ -10,8 +10,6 @@ button{
 }
 .cell{
 	border: 1px solid blue;
-	height: 9.5%;
-	width: 9.5%;
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
@@ -39,6 +37,7 @@ button{
 	font-size: 1em;
 }
 #board{
+	table-layout: fixed;
 	width: 90vw;
 	height: 80vh;
 	border: 1px solid green;
