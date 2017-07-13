@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var $mines = $("#mines");
 	var $board = $("#board");
+	var $playing = true;
 	var protect = false;
 	var mines = 0;
 
