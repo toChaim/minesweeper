@@ -100,6 +100,12 @@ $(document).ready(function(){
 		$("#protect").toggleClass("red");
 	});
 
+	$board.on('contextmenu', 'td', function(event){
+		event.stopPropagation();
+		var $this = $(this);
+			$this.toggleClass('marked');
+	});
+
 	$board.on("click", "td" ,function(event){
 		event.stopPropagation();
 		if( !playing ) return;
